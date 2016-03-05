@@ -4,8 +4,18 @@ using System.Collections;
 public class testJoystick : MonoBehaviour {
 
 
+	public GameObject ball;
+
 	public Material[] materials;
 	public int matNum;
+
+	private float moveHoriz;
+	private float moveVert;
+	private float moveHorizR;
+	private float moveVertR;
+
+	private Vector2 dir;
+
 
 	// Use this for initialization
 	void Start () {
@@ -18,21 +28,19 @@ public class testJoystick : MonoBehaviour {
 
 		GetComponent<TrailRenderer> ().material = materials [matNum];
 
-		float moveHoriz = Input.GetAxis("Horizontal");
-		float moveVert = Input.GetAxis("Vertical");
+		moveHoriz = Input.GetAxis("Horizontal");
+		moveVert = Input.GetAxis("Vertical");
+		moveHorizR = Input.GetAxis("HorizontalRIGHT");
+		moveVertR = Input.GetAxis("VerticalRIGHT");
 
-		Vector2 dir = new Vector2 (moveHoriz, moveVert);
-
-		if (moveHoriz > 0) {
-			print ("working");
-		} 
-
-		if (Input.GetButtonDown("Jump")) {
-			GetComponent<Rigidbody2D> ().AddForce (dir * 900);
-		}
-
-
+		dir = new Vector2 (moveHorizR, moveVertR);
 
 		//Vector2 targetDirection = new Vector3( touchPosition.x, 0f touchPosition.y );
+	}
+
+	void OnTriggerStay2D(Collider2D other){
+		if (other.CompareTag ("Player")) {
+			ball.GetComponent<Rigidbody2D> ().AddForce (dir * 500);
+		}
 	}
 }
