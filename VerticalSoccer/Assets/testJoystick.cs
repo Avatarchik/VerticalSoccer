@@ -14,6 +14,8 @@ public class testJoystick : MonoBehaviour {
 	private float moveHorizR;
 	private float moveVertR;
 
+	private float speed;
+
 	private Vector2 dir;
 
 
@@ -25,6 +27,13 @@ public class testJoystick : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		if (Input.GetKeyDown (KeyCode.O)) {
+			matNum = matNum + 1;
+			if (matNum == 4) {
+				matNum = 0;
+			}
+		}
+
 
 		GetComponent<TrailRenderer> ().material = materials [matNum];
 
@@ -35,12 +44,18 @@ public class testJoystick : MonoBehaviour {
 
 		dir = new Vector2 (moveHorizR, moveVertR);
 
-		//Vector2 targetDirection = new Vector3( touchPosition.x, 0f touchPosition.y );
+
 	}
 
 	void OnTriggerStay2D(Collider2D other){
-		if (other.CompareTag ("Player")) {
+		if (other.CompareTag ("Player") && other.GetComponent<playerKick>().kicked == false) {
 			ball.GetComponent<Rigidbody2D> ().AddForce (dir * 500);
 		}
 	}
+
+	void OnDestroy (){
+		Destroy (ball);
+	}
+
+
 }
