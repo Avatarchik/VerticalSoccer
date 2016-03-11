@@ -27,12 +27,31 @@ public class testJoystick : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown (KeyCode.O)) {
-			matNum = matNum + 1;
-			if (matNum == 4) {
-				matNum = 0;
-			}
+		// BALL FORCE TEST ====================
+
+		if (Input.GetKeyDown (KeyCode.P)) {
+			ball.GetComponent<Rigidbody2D> ().AddForce (transform.up * 1000);
 		}
+
+		//COLOR CHANGE TEST ====================
+
+		if (Input.GetKeyDown (KeyCode.Alpha1)) {
+			matNum = 0;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Alpha2)) {
+			matNum = 1;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Alpha3)) {
+			matNum = 2;
+		}
+
+		if (Input.GetKeyDown (KeyCode.Alpha4)) {
+			matNum = 3;
+		}
+
+		// ======================================
 
 
 		GetComponent<TrailRenderer> ().material = materials [matNum];
