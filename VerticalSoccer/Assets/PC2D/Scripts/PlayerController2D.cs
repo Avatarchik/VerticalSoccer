@@ -3,9 +3,13 @@ using UnityEngine;
 /// <summary>
 /// This class is a simple example of how to build a controller that interacts with PlatformerMotor2D.
 /// </summary>
+
 [RequireComponent(typeof(PlatformerMotor2D))]
 public class PlayerController2D : MonoBehaviour
 {
+
+
+
     private PlatformerMotor2D _motor;
     private bool _restored = true;
     private bool _enableOneWayPlatforms;
@@ -13,7 +17,7 @@ public class PlayerController2D : MonoBehaviour
 
     // Use this for initialization
     void Start()
-    {
+	{
         _motor = GetComponent<PlatformerMotor2D>();
     }
 
